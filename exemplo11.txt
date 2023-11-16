@@ -1,0 +1,5 @@
+//Aspas nao fechada na linha 4
+program exemplo11; 
+{
+   write ("TEste); 
+}

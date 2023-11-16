@@ -1,0 +1,8 @@
+//Programa correto. Usar variável sem declará-la não é um erro sintático e sim semântico.
+// Nesta parte do trabalho não estamos verificando erro semãntico e sintaticamente o código está correto.
+program exemplo15;
+
+{
+    read (x);
+    write (x):
+}

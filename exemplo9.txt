@@ -1,0 +1,4 @@
+program exemplo9; 
+{
+    write ("tESTANTO")  //erro: faltando o ;
+}

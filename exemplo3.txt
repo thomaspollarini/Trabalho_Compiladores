@@ -1,0 +1,24 @@
+//Erro na linha 3: falta um ID
+program exemplo3;
+VAR x,y,: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = x;
+    b = true;
+    while(b)
+    { 
+        if(y>10)
+        { 
+             write(y);
+        }
+        else
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}

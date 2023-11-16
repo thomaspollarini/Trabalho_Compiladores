@@ -1,0 +1,25 @@
+//Este programa tem um comentario de bloco aberto  na linha 13 e nao
+//fechado e identificadore invalido na linhas 11
+program exemplo2;
+VAR x,y: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = çx;
+    b = true;
+    while(b)  /* comentário aberto e não fechado
+    { 
+        if(y>10)
+        { 
+             write(y);
+        }
+        else
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}

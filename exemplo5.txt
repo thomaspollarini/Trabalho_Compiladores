@@ -1,0 +1,24 @@
+//Comentario de bloco aberto e nao fechado na linha 3
+program exemplo5;
+VAR x,y: int; /* comentário aberto e não fechado
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = x;
+    b = true;
+    while(b)
+    { 
+        if(y>10)
+        { 
+             write(y);
+        }
+        else
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}

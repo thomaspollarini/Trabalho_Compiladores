@@ -1,0 +1,24 @@
+// programa com erro na linha 18
+program exemplo8;
+VAR x,y: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = x;
+    b = true;
+    while(b)
+    { 
+        if(y>10)
+        { 
+             write(y);
+        }
+        else (teste) //no comando else nao existe condicao
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}

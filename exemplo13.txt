@@ -1,0 +1,24 @@
+//Programa com erro
+program exemplo13;
+VAR x,y: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = x;
+    b = true;
+    while(b)
+    { 
+        if(y>10)
+        { 
+             write y); // parênteses não aberto
+        }
+        else
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}
