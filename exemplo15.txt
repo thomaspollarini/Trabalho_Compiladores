@@ -4,5 +4,5 @@ program exemplo15;
 
 {
     read (x);
-    write (x):
+    write (x);
 }

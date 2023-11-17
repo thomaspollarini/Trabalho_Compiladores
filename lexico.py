@@ -1,37 +1,9 @@
-"""
-
- Linguagem Toy
-
-    Gramatica::
-
-    F* --> C F | C
-    C  --> A | R | P
-    A --> ident = E ;
-    R --> read ( ident ) ;
-    P --> print ( ident ) ;
-
-    E --> M Rs
-    Rs --> + M Rs | lambda
-    M --> Op Rm
-    Rm --> * Op Rm | lambda
-    Op --> ( E ) | num
-
-    Tokens::
-
-    IDENT ATRIB READ PTOVIRG PRINT ADD MULT OPENPAR CLOSEPAR NUM ERROR FIMARQ
-
-    Comentarios::
-
-    iniciam com # ate o fim da linha
-
-"""
-
 from os import path
 
 class TipoToken:
     PROGRAM = (1, 'program')
     ID = (2, 'id')
-    VAR = (3, 'var')
+    VAR = (3, 'VAR')
     INT = (4, 'int')
     REAL = (5, 'real')
     BOOL = (6, 'bool')
@@ -72,7 +44,7 @@ class Token:
 class Lexico:
     # dicionario de palavras reservadas
     reservadas = { 'program': TipoToken.PROGRAM,
-                   'var': TipoToken.VAR,
+                   'VAR': TipoToken.VAR,
                    'int': TipoToken.INT,
                    'real': TipoToken.REAL,
                    'bool': TipoToken.BOOL,
@@ -245,13 +217,13 @@ class Lexico:
                     return Token(TipoToken.OPNEG, lexema, self.linha)
                 elif car == '\"':
                     car = self.getChar()
-                    lexema += car
                     while (not car is None) and (car != '\"'):
-                        car = self.getChar()
                         lexema += car
+                        car = self.getChar()
                     if car is None:
                         estado = 1
                     else:
+                        lexema += car
                         return Token(TipoToken.CADEIA, lexema, self.linha)
             elif estado == 5:
                 # consumindo comentario
