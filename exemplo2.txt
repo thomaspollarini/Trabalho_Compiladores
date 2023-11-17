@@ -1,5 +1,5 @@
-//Este programa tem um comentario de bloco aberto  na linha 13 e nao
-//fechado e identificadore invalido na linhas 11
+/*Este programa tem um comentario de bloco aberto  na linha 13 e nao
+fechado e identificadore invalido na linhas 11*/
 program exemplo2;
 VAR x,y: int;
     c:   char;
@@ -8,9 +8,9 @@ VAR x,y: int;
 {
     write("Digite um numero:");
     read(x);
-    y = çx;
+    y = Ã§x;
     b = true;
-    while(b)  /* comentário aberto e não fechado
+    while(b)  /* comentï¿½rio aberto e nï¿½o fechado
     { 
         if(y>10)
         { 
