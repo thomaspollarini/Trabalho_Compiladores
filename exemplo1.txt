@@ -17,7 +17,7 @@ VAR x,y: int;
         }
         else
         {
-             y = y + 3;
+             y = y + -3;
              b = false;
         }
      }

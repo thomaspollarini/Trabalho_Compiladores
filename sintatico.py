@@ -1,3 +1,19 @@
+"""
+Nome Discente: Thomas Santos Pollarini
+Matrícula: 0064232
+Data: 19/11/2023
+
+
+Declaro que sou o único autor e responsável por este programa. Todas as partes do programa, exceto as que foram fornecidas
+pelo professor ou copiadas do livro ou das bibliotecas de Aho et al., foram desenvolvidas por mim. Declaro também que
+sou responsável por todas  as eventuais cópias deste programa e que não distribui nem facilitei a distribuição de cópias. 
+
+Código responsável pela parte sintatica do compilador, verifica se os TOKENS da parte lexica estão de acordo com a gramática
+estabelecida.
+
+"""
+
+
 from lexico import TipoToken as tt, Token, Lexico
 
 class Sintatico:
@@ -14,17 +30,17 @@ class Sintatico:
             self.lex.abreArquivo()
             self.tokenAtual = self.lex.getToken()
 
-            self.PROG()
+            self.PROG()   #chama regra inicial da gramática
             self.consome( tt.FIMARQ )
             print("PALAVRA ACEITA")
             
             self.lex.fechaArquivo()
 
-    def atualIgual(self, token):
+    def atualIgual(self, token):    #funçao que verifica igualdade de tokens
         (const, msg) = token
         return self.tokenAtual.const == const
 
-    def consome(self, token):
+    def consome(self, token):       #funcao para 
         if self.atualIgual( token ):
             self.tokenAtual = self.lex.getToken()
         else:
@@ -33,7 +49,18 @@ class Sintatico:
                % (self.tokenAtual.linha, msg, self.tokenAtual.lexema))
             quit()
 
-    def PROG(self):
+    """
+        Funções abaixo representam as regras da gramática
+        
+        utilizamos a funçao atualIgual para saber qual regra será chamada, em
+        casos onde um Não terminal tenha mais de uma regra
+        
+        caso a função consome não consuma o token esperado ou em casos onde nenhuma
+        regra do Não terminal atual seja escolhida, haverá um erro sintatico.
+    
+    """
+
+    def PROG(self):                                 
         self.consome(tt.PROGRAM)
         self.consome(tt.ID)
         self.consome(tt.PVIRG)
@@ -239,9 +266,8 @@ class Sintatico:
 if __name__== "__main__":
 
    #nome = input("Entre com o nome do arquivo: ")
-   for i in range(1,16):
-        nome = 'exemplo'+str(i)+'.txt'
-        print(nome)
-        parser = Sintatico()
-        parser.interprete(nome)
+    nome = 'exemplo1.txt'
+
+    parser = Sintatico()
+    parser.interprete(nome)
    

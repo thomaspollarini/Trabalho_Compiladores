@@ -1,7 +1,21 @@
+"""
+Nome Discente: Thomas Santos Pollarini
+Matrícula: 0064232
+Data: 19/11/2023
+
+
+Declaro que sou o único autor e responsável por este programa. Todas as partes do programa, exceto as que foram fornecidas
+pelo professor ou copiadas do livro ou das bibliotecas de Aho et al., foram desenvolvidas por mim. Declaro também que
+sou responsável por todas  as eventuais cópias deste programa e que não distribui nem facilitei a distribuição de cópias. 
+
+Código responsável pela parte lexica do compilador, ele lê o arquivo e faz a separação dos TOKENS.
+
+"""
+
 from os import path
 
 class TipoToken:
-    PROGRAM = (1, 'program')
+    PROGRAM = (1, 'program')        #cria os TOKENS utilizados na gramática
     ID = (2, 'id')
     VAR = (3, 'VAR')
     INT = (4, 'int')
@@ -32,8 +46,8 @@ class TipoToken:
     ERROR = (29, 'erro')
     FIMARQ = (30, 'fim-de-arquivo')
 
-class Token:
-    def __init__(self, tipo, lexema, linha):
+class Token:                                
+    def __init__(self, tipo, lexema, linha):  #classe utilizada para armazenar TOKEN
         self.tipo = tipo
         (const, msg) = tipo
         self.const = const
@@ -82,11 +96,14 @@ class Lexico:
         else:
             self.arquivo.close()
             
-    def is_alpha(self,car):
+    def is_alpha(self,car):   #funcao para pegar letras aceitas pela gramática
         return 'A' <= car <= 'Z' or 'a' <= car <= 'z'
 
-    def is_alnum(self,car):
-        return self.is_alpha(car) or '0' <= car <= '9'
+    def is_digit(self,car):   #funcao para pegar digitos aceitas pela gramática
+        return '0' <= car <= '9'
+
+    def is_alnum(self,car):  #funcao para pegar letras e digitos aceitas pela gramática
+        return self.is_alpha(car) or self.is_digit(car)
 
     def getChar(self):
         if self.arquivo is None:
@@ -118,54 +135,54 @@ class Lexico:
                 # estado inicial que faz primeira classificacao
                 car = self.getChar()
                 if car is None:
-                    return Token(TipoToken.FIMARQ, '<eof>', self.linha)
-                elif car in {' ', '\t', '\n'}:
+                    return Token(TipoToken.FIMARQ, '<eof>', self.linha)  #se car está vazio, então retorna token fim de arquivo
+                elif car in {' ', '\t', '\n'}:   #ignora espaços
                     if car == '\n':
                         self.linha = self.linha + 1
-                elif self.is_alpha(car):
+                elif self.is_alpha(car):   #se car começar com letra manda para estado 2, tratamento de ID
                     estado = 2
-                elif car.isdigit():
+                elif self.is_digit(car):  #se car começar com digito manda para estado 3, tratamento de CTE
                     estado = 3
-                elif car in {'+','-'}:
-                    aux = self.getChar()
-                    if aux.isdigit():
+                elif car in {'+','-'}:  # se + ou -, verifica se proximo car é digito
+                    aux = self.getChar()    
+                    if self.is_digit(aux):  # se for digito manda para estado 3, tratamento de CTE
                         self.ungetChar(aux)
                         estado=3  
-                    else:    
+                    else:                    #caso contrario manda para estado 4, tratamento de caracteres especiais
                         self.ungetChar(aux)
                         estado=4
-                elif car in {'=', ';','*', '(', ')','<','>','!','{','}',':',',','\"'}:
-                    estado = 4
-                elif car == '/':
-                    car = self.getChar()
+                elif car in {'=', ';','*', '(', ')','<','>','!','{','}',':',',','\"'}: 
+                    estado = 4            #caso encontre um dos caracteres acima manda para estado 4
+                elif car == '/':          
+                    car = self.getChar()    #caso encontre barra verifica caso dos comentarios
                     if car == '/' or car == '*':
-                        estado=5
+                        estado=5        #se for comentario manda para estado 5, tratamento de comentarios
                     else:
-                        self.ungetChar(car)
-                        car='/'
+                        self.ungetChar(car) #caso contrario, manda para estado 4
+                        car='/' #recoloca / no car para comparação no estado 4
                         estado=4
                 else:
-                    return Token(TipoToken.ERROR, '<' + car + '>', self.linha)
-            elif estado == 2:
+                    return Token(TipoToken.ERROR, '<' + car + '>', self.linha) #não entrar em nenhum caso caracter não faz parte
+            elif estado == 2:                                                  # da gramática, retorna um TOKEN ERRO
                 # estado que trata nomes (identificadores ou palavras reservadas)
                 lexema = lexema + car
-                car = self.getChar()
+                car = self.getChar()   
                 if car is None or (not self.is_alnum(car)):
                     # terminou o nome
                     self.ungetChar(car)
-                    if lexema in Lexico.reservadas:
-                        return Token(Lexico.reservadas[lexema], lexema, self.linha)
+                    if lexema in Lexico.reservadas:           #verifica se é uma palavra reservada
+                        return Token(Lexico.reservadas[lexema], lexema, self.linha) 
                     else:
-                        if len(lexema)>32:
+                        if len(lexema)>32:                  #senão é um ID, caso tenha mais de 32 caracters retorna TOKEN ERRO
                             return Token(TipoToken.ERROR, '<' + lexema + '>', self.linha)
                         return Token(TipoToken.ID, lexema, self.linha)
             elif estado == 3:
                 # estado que trata numeros inteiros
                 lexema = lexema + car
                 car = self.getChar()
-                if car == '.' and '.' not in lexema:
+                if car == '.' and '.' not in lexema:  #tratemento para aceitar numeros reais
                     continue
-                if car is None or (not car.isdigit()):
+                if car is None or (not self.is_digit(car)):
                     # terminou o numero
                     self.ungetChar(car)
                     return Token(TipoToken.CTE, lexema, self.linha)
@@ -173,7 +190,7 @@ class Lexico:
             elif estado == 4:
                 # estado que trata outros tokens primitivos comuns
                 lexema = lexema + car
-                if car == '=':
+                if car == '=':               #em caso de =, >, < verifica proximo car, para pegar ==, >=,<=, <>
                     car=self.getChar()
                     if car == '=':
                         lexema += car
@@ -228,16 +245,16 @@ class Lexico:
             elif estado == 5:
                 # consumindo comentario
                 if car == '/':
-                    while (not car is None) and (car != '\n'):
+                    while (not car is None) and (car != '\n'):    #emm caso de comentario de linha, anda até \n
                         car = self.getChar()
                 else:
-                    while (not car is None):
+                    while (not car is None):    #em caso de comentario em bloco anda até achar */
                         car = self.getChar()
                         if car == '*':
                             car = self.getChar()
                             if car == '/':
                                 break
-                estado = 1
+                estado = 1 #no fim retorna para estado 1, pois nenhum token foi encontrado até então
             else:
                 return Token(TipoToken.ERROR, '<' + car + '>', self.linha)
 
@@ -245,7 +262,7 @@ class Lexico:
 if __name__== "__main__":
 
    #nome = input("Entre com o nome do arquivo: ")
-   nome = 'exemplo2.txt'
+   nome = 'exemplo1.txt'
    lex = Lexico(nome)
    lex.abreArquivo()
 
