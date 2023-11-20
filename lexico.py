@@ -105,7 +105,8 @@ class Lexico:
     def is_alnum(self,car):  #funcao para pegar letras e digitos aceitas pela gramática
         return self.is_alpha(car) or self.is_digit(car)
 
-    def getChar(self):
+    # retorna o proximo caracter do arquivo
+    def getChar(self): 
         if self.arquivo is None:
             print('ERRO: Nao ha arquivo aberto')
             quit()
@@ -122,10 +123,12 @@ class Lexico:
             else:
                 return c
 
+    # retorna o ultimo caracter lido para o arquivo
     def ungetChar(self, c):
         if not c is None:
             self.buffer = self.buffer + c
 
+    # retorna o proximo token do arquivo
     def getToken(self):
         lexema = ''
         estado = 1
@@ -261,11 +264,12 @@ class Lexico:
 
 if __name__== "__main__":
 
-   #nome = input("Entre com o nome do arquivo: ")
-   nome = 'exemplo1.txt'
+   nome = input("Entre com o nome do arquivo: ")
+   #nome = 'exemplo1.txt'
    lex = Lexico(nome)
    lex.abreArquivo()
 
+    # le todos os tokens do arquivo e imprime na tela
    while(True):
        token = lex.getToken()
        print("token= %s , lexema= (%s), linha= %d" % (token.msg, token.lexema, token.linha))
