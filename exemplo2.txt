@@ -8,7 +8,7 @@ VAR x,y: int;
 {
     write("Digite um numero:");
     read(x);
-    y = çx;
+    y = ãx;
     b = true;
     while(b)  /* coment�rio aberto e n�o fechado
     { 

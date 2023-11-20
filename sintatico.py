@@ -124,6 +124,7 @@ class Sintatico:
         else:
             print('ERRO DE SINTAXE [linha %d]: era esperado %s mas veio "%s"'
                % (self.tokenAtual.linha, '"int" | "real" | "bool" | "char"', self.tokenAtual.lexema))
+            quit()
 
     #C_COMP → abrech LISTA_COMANDOS fechach
     def C_COMP(self):
@@ -160,6 +161,7 @@ class Sintatico:
         else:
             print('ERRO DE SINTAXE [linha %d]: era esperado %s mas veio "%s"'
                % (self.tokenAtual.linha, '"if" | "while" | "read" | "write" | "id"', self.tokenAtual.lexema))
+            quit()
 
     #SE → if abrepar EXPR fechapar C_COMP H
     def SE(self):
@@ -233,6 +235,7 @@ class Sintatico:
         else:
             print('ERRO DE SINTAXE [linha %d]: era esperado %s mas veio "%s"'
                % (self.tokenAtual.linha, '"id" | "cte" | "(" | "true" | "false" | "!" | "cadeia"', self.tokenAtual.lexema))
+            quit()
             
     #EXPR → SIMPLES P
     def EXPR(self):
@@ -293,6 +296,7 @@ class Sintatico:
         else:
             print('ERRO DE SINTAXE [linha %d]: era esperado %s mas veio "%s"'
                % (self.tokenAtual.linha, '"id" | "cte" | "(" | "true" | "false" | "!"', self.tokenAtual.lexema))
+            quit()
 
 if __name__== "__main__":
 
