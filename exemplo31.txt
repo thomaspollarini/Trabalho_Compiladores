@@ -1,0 +1,6 @@
+//Programa correto incorreto
+
+{
+    read (x) // ausência de ponto e vírgula
+    write (x);
+// ausência de fecha chaves

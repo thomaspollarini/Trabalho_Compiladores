@@ -1,0 +1,7 @@
+//Programa correto incorreto
+
+{
+    read (x) // ausência de ponto e vírgula
+    write (x);
+}
+} // não deveria ter esta chave aqui

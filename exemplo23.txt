@@ -1,0 +1,23 @@
+// programa com erros nas linhas 9, 15 e 17
+program exemplo8;
+VAR x,y: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x) // ausência de ponto e vírgula
+    y = x;  b = true;
+    while(b)
+    { 
+        if(y>10)
+        { 
+             write (y; // falta fecha parenteses
+        }
+        else (teste) //no comando else nao existe condicao
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}

@@ -1,0 +1,26 @@
+//Falta tipo da variável na linha 8
+// Ausência de ponto e vírgula na linha 10
+// Falta fecha parênteses na linha 14
+program exemplo5;
+VAR x,y: int; 
+    c:   char;
+    r:   real;
+    b:   ;
+{
+    write("Digite um numero:")
+    read(x);
+    y = x;
+    b = true;
+    while(b
+    { 
+        if(y>10)
+        { 
+             write(y);
+        }
+        else
+        {
+             y = y + 3;
+             b = false;
+        }
+     }
+}

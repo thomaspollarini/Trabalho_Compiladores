@@ -1,0 +1,25 @@
+//Erro na linha 7 (ausencia de ponto e virgula)
+// Erro linha 14 falta abre parênteses
+// Erro linha 26 falta fecha chaves
+program exemplo6;
+VAR x,y: int;
+    c:   char;
+    r:   real
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = x;
+    b = true;
+    whileb)
+    { 
+        if(y>10)
+        { 
+             write(y);
+        }
+        else
+        {
+             y = y + 3;
+             b = false;
+        }
+     }

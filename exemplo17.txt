@@ -1,0 +1,26 @@
+//Este programa tem um  identificadores inválidos na linha 11 
+//Falta ponto e vírgula nas linhas 18 e 23
+
+program exemplo2;
+VAR x,y: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = çx;
+    b = true;
+    while(b)
+    { 
+        if(y>10)
+        { 
+             write(y)
+        }
+        else
+        {
+             y = y + 3;
+             b = false
+        }
+     }
+}

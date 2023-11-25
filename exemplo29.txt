@@ -1,0 +1,24 @@
+//Programa com erro
+program exemplo14;
+VAR x,y: int;
+    c:   char;
+    r:   real;
+    b:   bool;
+{
+    write("Digite um numero:");
+    read(x);
+    y = x;
+    b = true   // falta ponto e virgula
+    while(b   // falta fechar parenteses
+    { 
+        if(y>10  // falta fechar parenteses
+        { 
+             write(y);
+          // falta fechar a chave
+        else
+          // falta abrir a chave
+             y = y + 3;
+             b = false;
+        }
+     // falta fechar a chave
+}

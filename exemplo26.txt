@@ -1,0 +1,5 @@
+
+program exemplo11; 
+{
+   write ("TEste"; //falta fechar parenteses aqui
+// falta fechar chaves aqui
