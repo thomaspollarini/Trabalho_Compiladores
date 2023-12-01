@@ -1,6 +1,17 @@
-#
-#    Testa o tradutor
-#
+"""
+Nome Discente: Thomas Santos Pollarini
+Matrícula: 0064232
+Data: 30/11/2023
+
+
+Declaro que sou o único autor e responsável por este programa. Todas as partes do programa, exceto as que foram fornecidas
+pelo professor ou copiadas do livro ou das bibliotecas de Aho et al., foram desenvolvidas por mim. Declaro também que
+sou responsável por todas  as eventuais cópias deste programa e que não distribui nem facilitei a distribuição de cópias. 
+
+Código responsável por executar o programa principal, que recebe como argumento o nome do arquivo a ser analisado e a opção
+de execução -t, que gera um arquivo com a tabela de símbolos.
+
+"""
 
 from sintatico import Sintatico
 
