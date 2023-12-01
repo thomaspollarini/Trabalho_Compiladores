@@ -18,10 +18,7 @@ class TabelaSimbolos:
         self.tabela = dict()
 
     def existeIdent(self, nome):
-        if nome in self.tabela:
-            return True
-        else:
-            return False
+        return nome in self.tabela
 
     def declaraIdent(self, nomes, valor,linha):
         for nome in nomes: #para cada nome na lista de nomes
