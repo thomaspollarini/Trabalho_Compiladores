@@ -15,6 +15,7 @@ estabelecida.
 
 
 from lexico import TipoToken as tt, Token, Lexico
+from tabela import TabelaSimbolos
 
 class Sintatico:
     #construtor da classe
@@ -26,6 +27,7 @@ class Sintatico:
         self.modoPanico = False
         self.tokensDeSincronismo = [tt.PVIRG, tt.FIMARQ]
 
+
     #função que inicia a interpretação do arquivo
     def interprete(self, nomeArquivo):
         if not self.lex is None:
@@ -34,7 +36,7 @@ class Sintatico:
             self.lex = Lexico(nomeArquivo)
             self.lex.abreArquivo()
             self.tokenAtual = self.lex.getToken()
-
+            self.tabsimb = TabelaSimbolos()
             self.PROG()   #chama regra inicial da gramática
             self.consome( tt.FIMARQ )
             
@@ -54,6 +56,7 @@ class Sintatico:
         if not self.modoPanico and self.tokenEsperadoEncontrado( token ):
             # tudo seguindo de acordo
             self.tokenAtual = self.lex.getToken()
+            
         elif not self.modoPanico:
             # agora deu erro, solta msg e entra no modo panico
             self.modoPanico = True
@@ -121,21 +124,25 @@ class Sintatico:
         
     #DECL_TIPO → LIST_ID dpontos TIPO pvirg
     def DECL_TIPO(self):
-        self.LIST_ID()
+        nomes=[] #lista de para salvar ids
+        self.LIST_ID(nomes)
         self.consome(tt.DPONTOS)
-        self.TIPO()
+        valor =self.TIPO() #salva o tipo
+        self.tabsimb.declaraIdent(nomes, valor,self.tokenAtual.linha) #declara os ids na tabela de simbolos
         self.consome(tt.PVIRG)
         
     #LIST_ID → id E
-    def LIST_ID(self):
+    def LIST_ID(self, nomes=[]):
+        if self.tokenEsperadoEncontrado(tt.ID):   #se for um id
+            nomes.append(self.tokenAtual.lexema)  #adiciona na lista de ids
         self.consome( tt.ID )
-        self.E()
+        self.E(nomes)
 
     #E → virg LIST_ID | λ
-    def E(self):
+    def E(self,nomes):
         if self.tokenEsperadoEncontrado(tt.VIRG):
             self.consome(tt.VIRG)
-            self.LIST_ID()
+            self.LIST_ID(nomes)
         else:
             pass
 
@@ -143,12 +150,16 @@ class Sintatico:
     def TIPO(self):
         if self.tokenEsperadoEncontrado( tt.INT ):
             self.consome(tt.INT)
+            return "int"
         elif self.tokenEsperadoEncontrado(tt.REAL):
             self.consome(tt.REAL)
+            return "real"
         elif self.tokenEsperadoEncontrado(tt.BOOL):
             self.consome(tt.BOOL)
+            return "bool"
         else:
             self.consome(tt.CHAR)
+            return "char"
         
 
     #C_COMP → abrech LISTA_COMANDOS fechach

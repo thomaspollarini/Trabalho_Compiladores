@@ -8,13 +8,13 @@ VAR x,y: int;
 {
     write("Digite um numero:");
     read(x);
-    y = ãx;
+    y = x;
     b = true;
-    while(b)  /* coment�rio aberto e n�o fechado
+    while(b)   //scoment�rio aberto e n�o fechado
     { 
         if(y>10)
         { 
-             write(y);
+             write(true + false <= !5);
         }
         else
         {

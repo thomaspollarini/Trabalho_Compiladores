@@ -220,7 +220,7 @@ class Lexico:
                 elif car == ':':
                     return Token(TipoToken.DPONTOS, lexema, self.linha)
                 elif car == '<':
-                    car = self.getchar()
+                    car = self.getChar()
                     if car == '=' or car == '>':
                         lexema += car
                     else:
