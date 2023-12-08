@@ -1,13 +1,13 @@
 //Erro na linha 3. ID não pode inicar com número
 program exemplo4;
-VAR 4x,y: int;
+VAR 4x,7y: kaka;
     c:   char;
     r:   real;
     b:   bool;
 {
     write("Digite um numero:");
     read(x);
-    y = x;
+    y = + x;
     b = true;
     while(b)
     { 
