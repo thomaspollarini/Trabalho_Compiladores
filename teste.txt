@@ -1,5 +1,3 @@
-x:int
-y:int
 c:char
 r:real
 b:bool

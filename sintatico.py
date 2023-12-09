@@ -33,7 +33,7 @@ class Sintatico:
                        'LIST_ID' : [tt.DPONTOS, tt.FECHAPAR],
                        'E' : [tt.DPONTOS, tt.FECHAPAR],
                        'TIPO' : [tt.PVIRG],
-                       'C_COMP' : [tt.FIMARQ,tt.IF,tt.WHILE,tt.READ,tt.WRITE,tt.ID,tt.FECHACH],
+                       'C_COMP' : [tt.FIMARQ,tt.IF,tt.WHILE,tt.READ,tt.WRITE,tt.ID,tt.FECHACH,tt.ELSE],
                        'LISTA_COMANDOS' : [tt.FECHACH],
                        'G' : [tt.FECHACH],
                        'COMANDOS' : [tt.IF,tt.WHILE,tt.READ,tt.WRITE,tt.ID,tt.FECHACH],
